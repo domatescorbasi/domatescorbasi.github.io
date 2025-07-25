@@ -1,0 +1,231 @@
+body {
+  padding: 2rem;
+  max-width: 600px;
+  margin: auto;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.volume-slider {
+  width: 100%;
+}
+
+#status {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.preload-status {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.timer-display {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* Light Theme Inputs */
+.work-input {
+  background-color: #ffdddd;
+  border-color: #dc3545;
+}
+
+.short-break-input {
+  background-color: #d4edda;
+  border-color: #28a745;
+}
+
+.long-break-input {
+  background-color: #a7d7a7;
+  border-color: #218838;
+}
+
+/* Dark Theme */
+body.dark-mode {
+  background-color: #121212;
+  color: #f8f9fa;
+}
+
+body.dark-mode .card {
+  background-color: #1e1e1e;
+  border-color: #444;
+  transition: background-color 0.5s ease;
+}
+
+body.dark-mode .form-label {
+  color: #f1f1f1;
+}
+
+body.dark-mode .card-header {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-range {
+  background-color: #2f2f2f;
+  color: #ffffff;
+  border: 1px solid #555;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.dark-mode .btn {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode .btn-danger {
+  background-color: #c0392b;
+  border-color: #962d22;
+}
+
+/* Dark Mode Accents for Input Colors */
+body.dark-mode .work-input {
+  background-color: #5a1f1f;
+  border-color: #b33a3a;
+  color: #fff;
+}
+
+body.dark-mode .short-break-input {
+  background-color: #1e5a3b;
+  border-color: #3a7d4a;
+  color: #fff;
+}
+
+body.dark-mode .long-break-input {
+  background-color: #27664f;
+  border-color: #4a9174;
+  color: #fff;
+}
+
+/* =====================================
+   Subtle Hover Effects (Theme-Aware)
+   Light Mode: Soft Gray
+   Dark Mode: Gentle Yellow
+   ===================================== */
+
+/* === CARD === */
+.card:hover {
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(128, 128, 128, 0.15); /* soft gray */
+}
+
+body.dark-mode .card:hover {
+  box-shadow: 0 0 12px rgba(255, 255, 150, 0.15); /* soft yellow glow */
+}
+
+/* === CARD HEADER === */
+.card-header:hover {
+  background-color: rgba(200, 200, 200, 0.1); /* light gray highlight */
+  box-shadow: inset 0 0 6px rgba(128, 128, 128, 0.15);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode .card-header:hover {
+  background-color: rgba(255, 255, 100, 0.05); /* subtle yellow tint */
+  box-shadow: inset 0 0 8px rgba(255, 255, 150, 0.1);
+}
+
+/* === INPUTS === */
+input[type="number"]:hover,
+input[type="file"]:hover,
+input[type="range"]:hover {
+  box-shadow: 0 0 6px rgba(128, 128, 128, 0.2); /* light gray glow */
+  border-color: #6c757d;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode input[type="number"]:hover,
+body.dark-mode input[type="file"]:hover,
+body.dark-mode input[type="range"]:hover {
+  box-shadow: 0 0 6px rgba(255, 255, 150, 0.25);
+  border-color: #ffeb3b44;
+}
+
+/* === BUTTONS === */
+button:hover {
+  transition: box-shadow 0.3s ease;
+}
+/*
+body.dark-mode button:hover {
+  box-shadow: 0 2px 10px rgba(255, 255, 150, 0.2);
+}*/
+
+/* === TOGGLE LABEL === */
+.form-check-label:hover {
+  color: #6c757d;
+  text-shadow: 0 0 2px rgba(128, 128, 128, 0.2);
+}
+
+body.dark-mode .form-check-label:hover {
+  color: #fff17644;
+  text-shadow: 0 0 4px rgba(255, 255, 150, 0.3);
+}
+
+.btn-success:hover {
+  box-shadow: 0 4px 15px  #1D7A8288;
+}
+.btn-danger:hover {
+  box-shadow: 0 4px 15px  #80000088;
+}
+
+body.dark-mode .btn-success:hover {
+  box-shadow: 0 1px 10px  #1D7A82AA;
+}
+
+body.dark-mode .btn-danger:hover {
+  box-shadow: 0 1px 10px  #800000AA;
+}
+
+
+/* === Music Tabs Styling === */
+.nav-tabs {
+  display: flex;
+  width: 100%;
+}
+
+.nav-tabs .nav-item {
+  flex: 1;
+  text-align: center;
+}
+
+.nav-tabs .nav-link {
+  width: 100%;
+  border-radius: 0;
+  border: 1px solid transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode tabs */
+.nav-tabs .nav-link {
+  background-color: #ffe5e5;
+  color: #000;
+}
+
+.nav-tabs .nav-link:not(.active):hover {
+  background-color: #f5f5f5;
+}
+
+/* Active tab in light mode */
+.nav-tabs .nav-link.active {
+  background-color: #ffc1c1;
+  color: #000;
+  font-weight: bold;
+}
+
+/* Dark mode tabs */
+body.dark-mode .nav-tabs .nav-link {
+  background-color: #2a2a2a;
+  color: #f1f1f1;
+  border-color: #444;
+}
+
+body.dark-mode .nav-tabs .nav-link:not(.active):hover {
+  background-color: #3a3a3a;
+}
+
+body.dark-mode .nav-tabs .nav-link.active {
+  background-color: #4a1f1f;
+  font-weight: bold;
+}
