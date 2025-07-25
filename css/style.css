@@ -229,3 +229,20 @@ body.dark-mode .nav-tabs .nav-link.active {
   background-color: #4a1f1f;
   font-weight: bold;
 }
+
+#ytInput1:hover,
+#ytInput2:hover {
+  box-shadow: 0 0 6px rgba(255, 99, 132, 0.3); /* soft red glow */
+  border-color: #ff5c75;
+  background-color: #fff0f2;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Dark Mode Hover */
+body.dark-mode #ytInput1:hover,
+body.dark-mode #ytInput2:hover {
+  box-shadow: 0 0 8px rgba(255, 99, 132, 0.35); /* soft red glow */
+  border-color: #ff7990;
+  background-color: #3a1e26;
+  color: #fff;
+}
