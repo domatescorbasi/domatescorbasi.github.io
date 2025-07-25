@@ -7,7 +7,7 @@ class YouTubeMusicManager {
     this.current = null;
     this.next = null;
     this.readyCount = 0;
-	this.isPlaying = false;
+	  this.isPlaying = false;
 
     window.onYouTubeIframeAPIReady = this._onYouTubeAPIReady.bind(this);
   }
