@@ -127,6 +127,8 @@ class YouTubeMusicManager {
     if (this.player1) this.player1.stopVideo();
     if (this.player2) this.player2.stopVideo();
     this.isPlaying = false;
+     this.current = this.player1;
+     this.next = this.player2;
   }
 
   _sleep(ms) {
