@@ -55,6 +55,23 @@
         });
     });
 
+    // Restore saved music tab
+    const savedTabId = localStorage.getItem('selectedMusicTab') || '#youtube';
+    const musicTabEl = document.querySelector(`button[data-bs-target="${savedTabId}"]`);
+    if (musicTabEl) {
+      const tab = new bootstrap.Tab(musicTabEl);
+      tab.show();
+    }
+
+    // Listen for tab changes and save selection
+    document.querySelectorAll('#musicTab button[data-bs-toggle="tab"]').forEach(tabEl => {
+      tabEl.addEventListener('shown.bs.tab', event => {
+        const target = event.target.getAttribute('data-bs-target');
+        localStorage.setItem('selectedMusicTab', target);
+      });
+    });
+
+
 
     const workDurationInput = document.getElementById('workDuration');
     const breakDurationInput = document.getElementById('breakDuration');
@@ -348,7 +365,6 @@ breakAudio.addEventListener('ended', () => {
           favicon.href = 'assets/favicon.png'; // fallback
         }
       }
-
 
       if (link) {
         document.head.removeChild(link);
