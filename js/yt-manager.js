@@ -69,6 +69,7 @@ class YouTubeMusicManager {
 	      ytManager.setVolumeForCurrent(volume);
         }
       }
+      this.stopAll();
     }
   }
 
