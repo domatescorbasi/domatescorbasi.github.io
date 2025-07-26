@@ -247,6 +247,8 @@ breakVolSlider.addEventListener('input', () => {
     }
 
     ytManager.playCurrent();
+    const volume = parseFloat(workVolSlider.value);
+    ytManager.setVolumeForCurrent(volume);
 
     state.paused = false;
     state.startTime = Date.now();
