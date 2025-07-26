@@ -11,7 +11,7 @@
 	<body>
 		<div class="container py-4">
 			<div class="d-flex justify-content-between align-items-center mb-3">
-				<h1 class="mb-0">🍅 Pomodoro Music Player</h1>
+				<h1 class="mb-0 text-center">🍅 Pomodoro Music Player</h1>
 			</div>
 			<!-- Group 1: Pomodoro Durations ⏲️ -->
 			<div class="card mb-3">
@@ -62,11 +62,11 @@
 				</div>
 				<div id="musicTracksCollapse" class="collapse show">
 					<div class="card-body">
-						<ul class="nav nav-tabs mb-3" id="musicTab" role="tablist">
-							<li class="nav-item" role="presentation">
+						<ul class="nav nav-tabs mb-3 d-flex w-100" id="musicTab" role="tablist" style="display: flex;">
+							<li class="nav-item w-50" role="presentation">
 								<button class="nav-link active" id="local-tab" data-bs-toggle="tab" data-bs-target="#local" type="button" role="tab" aria-controls="local" aria-selected="true">🎵 Local Tracks</button>
 							</li>
-							<li class="nav-item" role="presentation">
+							<li class="nav-item w-50" role="presentation">
 								<button class="nav-link" id="youtube-tab" data-bs-toggle="tab" data-bs-target="#youtube" type="button" role="tab" aria-controls="youtube" aria-selected="false">📺 YouTube Video</button>
 							</li>
 						</ul>
