@@ -109,6 +109,29 @@ class YouTubeMusicManager {
         }
     }
 
+    playWork(startTime = 0) {
+    if (this.player1) {
+        this.player1.seekTo(startTime, true);
+        this.player1.setVolume(parseFloat(document.getElementById('workVolume').value) * 100);
+        this.player1.playVideo();
+        this.current = this.player1;
+        this.next = this.player2;
+        this.isPlaying = true;
+    }
+}
+
+playBreak(startTime = 0) {
+    if (this.player2) {
+        this.player2.seekTo(startTime, true);
+        this.player2.setVolume(parseFloat(document.getElementById('breakVolume').value) * 100);
+        this.player2.playVideo();
+        this.current = this.player2;
+        this.next = this.player1;
+        this.isPlaying = true;
+    }
+}
+
+
     async crossfade() {
         if (!this.current || !this.next) return;
 
