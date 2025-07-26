@@ -18,11 +18,12 @@
             }
         }
 
-        // Default to dark theme unless explicitly set to 'light'
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark' || savedTheme === null) {
-            body.classList.add('dark-mode');
-        }
+      // Default to dark theme unless explicitly set to 'light'
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || savedTheme === null) {
+          body.classList.add('dark-mode');
+          localStorage.setItem('theme', 'dark');
+      }
 
 
         updateThemeIcon();
@@ -61,16 +62,16 @@
     const savedTabId = localStorage.getItem('selectedMusicTab') || '#youtube';
     const musicTabEl = document.querySelector(`button[data-bs-target="${savedTabId}"]`);
     if (musicTabEl) {
-        const tab = new bootstrap.Tab(musicTabEl);
-        tab.show();
+      const tab = new bootstrap.Tab(musicTabEl);
+      tab.show();
     }
 
     // Listen for tab changes and save selection
     document.querySelectorAll('#musicTab button[data-bs-toggle="tab"]').forEach(tabEl => {
-        tabEl.addEventListener('shown.bs.tab', event => {
-            const target = event.target.getAttribute('data-bs-target');
-            localStorage.setItem('selectedMusicTab', target);
-        });
+      tabEl.addEventListener('shown.bs.tab', event => {
+        const target = event.target.getAttribute('data-bs-target');
+        localStorage.setItem('selectedMusicTab', target);
+      });
     });
 
 
@@ -132,49 +133,49 @@
         }
     }
 
-    let workPlaylist = [];
-    let breakPlaylist = [];
-    let workTrackIndex = 0;
-    let breakTrackIndex = 0;
+   let workPlaylist = [];
+let breakPlaylist = [];
+let workTrackIndex = 0;
+let breakTrackIndex = 0;
 
-    workTrackInput.addEventListener('change', () => {
-        workPlaylist = Array.from(workTrackInput.files);
-        workTrackIndex = 0;
-        if (workPlaylist.length > 0) {
-            workAudio.src = URL.createObjectURL(workPlaylist[workTrackIndex]);
-            if (state.mode === 'work' && !state.paused) {
-                workAudio.play();
-            }
-        }
-    });
-
-    breakTrackInput.addEventListener('change', () => {
-        breakPlaylist = Array.from(breakTrackInput.files);
-        breakTrackIndex = 0;
-        if (breakPlaylist.length > 0) {
-            breakAudio.src = URL.createObjectURL(breakPlaylist[breakTrackIndex]);
-            if ((state.mode === 'break' || state.mode === 'longBreak') && !state.paused) {
-                breakAudio.play();
-            }
-        }
-    });
-
-    // Playlist looping logic
-    workAudio.addEventListener('ended', () => {
-        if (workPlaylist.length > 1) {
-            workTrackIndex = (workTrackIndex + 1) % workPlaylist.length;
-            workAudio.src = URL.createObjectURL(workPlaylist[workTrackIndex]);
+workTrackInput.addEventListener('change', () => {
+    workPlaylist = Array.from(workTrackInput.files);
+    workTrackIndex = 0;
+    if (workPlaylist.length > 0) {
+        workAudio.src = URL.createObjectURL(workPlaylist[workTrackIndex]);
+        if (state.mode === 'work' && !state.paused) {
             workAudio.play();
         }
-    });
+    }
+});
 
-    breakAudio.addEventListener('ended', () => {
-        if (breakPlaylist.length > 1) {
-            breakTrackIndex = (breakTrackIndex + 1) % breakPlaylist.length;
-            breakAudio.src = URL.createObjectURL(breakPlaylist[breakTrackIndex]);
+breakTrackInput.addEventListener('change', () => {
+    breakPlaylist = Array.from(breakTrackInput.files);
+    breakTrackIndex = 0;
+    if (breakPlaylist.length > 0) {
+        breakAudio.src = URL.createObjectURL(breakPlaylist[breakTrackIndex]);
+        if ((state.mode === 'break' || state.mode === 'longBreak') && !state.paused) {
             breakAudio.play();
         }
-    });
+    }
+});
+
+// Playlist looping logic
+workAudio.addEventListener('ended', () => {
+    if (workPlaylist.length > 1) {
+        workTrackIndex = (workTrackIndex + 1) % workPlaylist.length;
+        workAudio.src = URL.createObjectURL(workPlaylist[workTrackIndex]);
+        workAudio.play();
+    }
+});
+
+breakAudio.addEventListener('ended', () => {
+    if (breakPlaylist.length > 1) {
+        breakTrackIndex = (breakTrackIndex + 1) % breakPlaylist.length;
+        breakAudio.src = URL.createObjectURL(breakPlaylist[breakTrackIndex]);
+        breakAudio.play();
+    }
+});
 
     workVolSlider.addEventListener('input', () => {
         const volume = parseFloat(workVolSlider.value);
@@ -349,29 +350,29 @@
     }
 
     function updateFavicon(stop = false) {
-        const link = document.querySelector("link[rel~='icon']");
-        const favicon = document.createElement('link');
-        favicon.rel = 'icon';
-        favicon.type = 'image/png';
+      const link = document.querySelector("link[rel~='icon']");
+      const favicon = document.createElement('link');
+      favicon.rel = 'icon';
+      favicon.type = 'image/png';
 
-        if (stop) {
-            favicon.href = 'assets/favicon.png';
+      if (stop) {
+        favicon.href = 'assets/favicon.png';
+      } else{
+        if (state.mode === 'work') {
+          favicon.href = 'assets/favicon-work.png';
+        } else if (state.mode === 'break') {
+          favicon.href = 'assets/favicon-break.png';
+        } else if (state.mode === 'longBreak') {
+          favicon.href = 'assets/favicon-longbreak.png';
         } else {
-            if (state.mode === 'work') {
-                favicon.href = 'assets/favicon-work.png';
-            } else if (state.mode === 'break') {
-                favicon.href = 'assets/favicon-break.png';
-            } else if (state.mode === 'longBreak') {
-                favicon.href = 'assets/favicon-longbreak.png';
-            } else {
-                favicon.href = 'assets/favicon.png'; // fallback
-            }
+          favicon.href = 'assets/favicon.png'; // fallback
         }
+      }
 
-        if (link) {
-            document.head.removeChild(link);
-        }
-        document.head.appendChild(favicon);
+      if (link) {
+        document.head.removeChild(link);
+      }
+      document.head.appendChild(favicon);
     }
 
 
