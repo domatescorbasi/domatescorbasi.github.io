@@ -74,8 +74,8 @@
     const workAudio = new Audio();
     const breakAudio = new Audio();
     workAudio.crossOrigin = breakAudio.crossOrigin = 'anonymous';
-    workAudio.loop = true;
-    breakAudio.loop = true;
+    workAudio.loop = false;
+    breakAudio.loop = false;
 
     let ctx = new AudioContext();
     const workSource = ctx.createMediaElementSource(workAudio);
@@ -113,18 +113,46 @@
         }
     }
 
+    let workPlaylist = [];
+    let breakPlaylist = [];
+    let workTrackIndex = 0;
+    let breakTrackIndex = 0;
+
     workTrackInput.addEventListener('change', () => {
-        const file = workTrackInput.files[0];
-        if (file) workAudio.src = URL.createObjectURL(file);
-        if (state.mode === 'work' && !state.paused) {
-            workAudio.play();
+        workPlaylist = Array.from(workTrackInput.files);
+        workTrackIndex = 0;
+        if (workPlaylist.length > 0) {
+            workAudio.src = URL.createObjectURL(workPlaylist[workTrackIndex]);
+            if (state.mode === 'work' && !state.paused) {
+                workAudio.play();
+            }
         }
     });
 
     breakTrackInput.addEventListener('change', () => {
-        const file = breakTrackInput.files[0];
-        if (file) breakAudio.src = URL.createObjectURL(file);
-        if ((state.mode === 'break' || state.mode === 'longBreak') && !state.paused) {
+        breakPlaylist = Array.from(breakTrackInput.files);
+        breakTrackIndex = 0;
+        if (breakPlaylist.length > 0) {
+            breakAudio.src = URL.createObjectURL(breakPlaylist[breakTrackIndex]);
+            if ((state.mode === 'break' || state.mode === 'longBreak') && !state.paused) {
+                breakAudio.play();
+            }
+        }
+    });
+
+    // Playlist looping logic
+    workAudio.addEventListener('ended', () => {
+        if (workPlaylist.length > 1) {
+            workTrackIndex = (workTrackIndex + 1) % workPlaylist.length;
+            workAudio.src = URL.createObjectURL(workPlaylist[workTrackIndex]);
+            workAudio.play();
+        }
+    });
+
+    breakAudio.addEventListener('ended', () => {
+        if (breakPlaylist.length > 1) {
+            breakTrackIndex = (breakTrackIndex + 1) % breakPlaylist.length;
+            breakAudio.src = URL.createObjectURL(breakPlaylist[breakTrackIndex]);
             breakAudio.play();
         }
     });
@@ -296,6 +324,8 @@
         startTimer();
         updateStatus();
         saveState();
+        startBtn.classList.add('d-none');
+        resetRoundsBtn.classList.remove('d-none');
     }
 
     function resetRounds() {
@@ -317,6 +347,8 @@
         if (isYouTubeTabActive()) {
             ytManager.stopAll();
         }
+        workTrackIndex = 0;
+        breakTrackIndex = 0;
         startBtn.classList.remove('d-none');
         resetRoundsBtn.classList.add('d-none');
     }
