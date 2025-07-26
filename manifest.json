@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Pomodoro Music Player",
+  "description": "🎵⏱️ Focus better with music-powered Pomodoro sessions.",
+  "version": "1.0",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "assets/favicon.png",
+      "48": "assets/favicon.png",
+      "128": "assets/favicon.png"
+    }
+  },
+  "icons": {
+    "16": "assets/favicon.png",
+    "48": "assets/favicon.png",
+    "128": "assets/favicon.png"
+  },
+  "permissions": ["storage"],
+  "host_permissions": ["https://www.youtube.com/*"],
+"web_accessible_resources": [
+  {
+    "resources": ["*.js", "*.css", "*.png"],
+    "matches": ["<all_urls>"]
+  }
+],
+  "content_security_policy": "script-src 'self' https://www.youtube.com https://cdn.jsdelivr.net; object-src 'self';"
+}
