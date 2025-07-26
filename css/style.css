@@ -265,3 +265,67 @@ body.dark-mode #ytInput2:hover {
   color: #fff;
 }
 
+/* === Volume Sliders === */
+
+/* Light Mode */
+.volume-slider {
+  appearance: none;
+  height: 6px;
+  background: linear-gradient(to right, #fce97b, #ffd700); /* warm yellow gradient */
+  border-radius: 4px;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffcc00;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffcc00;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+
+.volume-slider:hover {
+  background: linear-gradient(to right, #ffe066, #ffbf00); /* stronger yellow on hover */
+}
+
+/* Dark Mode */
+body.dark-mode .volume-slider {
+  background: linear-gradient(to right, #4a1f1f, #b33a3a); /* muted red to match work inputs */
+}
+
+body.dark-mode .volume-slider::-webkit-slider-thumb {
+  background: #ff6347; /* tomato red */
+  border: 2px solid #333;
+}
+
+body.dark-mode .volume-slider::-moz-range-thumb {
+  background: #ff6347;
+  border: 2px solid #333;
+}
+
+body.dark-mode .volume-slider:hover {
+  background: linear-gradient(to right, #5c2c2c, #e74c3c); /* enhanced red on hover */
+}
+
+
+.volume-slider:focus-visible {
+  outline: none;
+  box-shadow: 0 0 5px 2px rgba(255, 215, 0, 0.6);
+}
+
+body.dark-mode .volume-slider:focus-visible {
+  box-shadow: 0 0 5px 2px rgba(255, 100, 100, 0.6);
+}
