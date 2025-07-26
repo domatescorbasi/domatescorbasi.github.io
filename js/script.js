@@ -238,6 +238,7 @@ breakVolSlider.addEventListener('input', () => {
   function startPomodoro() {
   if (ctx.state === 'suspended') ctx.resume();
 
+  resetRounds();
   if (isYouTubeTabActive()) {
     // YouTube mode
     if (!ytManager || !ytManager.current || !ytManager.next) {
@@ -252,6 +253,8 @@ breakVolSlider.addEventListener('input', () => {
     startTimer();
     updateStatus();
     saveState();
+    startBtn.classList.add('d-none');
+    resetRoundsBtn.classList.remove('d-none');
     return;
   }
 
@@ -294,14 +297,15 @@ breakVolSlider.addEventListener('input', () => {
     saveState();
     updateStatus();
     statusDiv.textContent = 'Status: Not started';
-	workAudio.pause();
+	  workAudio.pause();
     breakAudio.pause();
     timerDiv.textContent = "00:00"
     document.title = "Pomodoro 🎵⏱️";
  	if (isYouTubeTabActive()) {
    	 	ytManager.stopAll();
   	}
-
+    startBtn.classList.remove('d-none');
+    resetRoundsBtn.classList.add('d-none');
 }
 
   startBtn.addEventListener('click', startPomodoro);

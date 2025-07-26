@@ -103,8 +103,14 @@ class YouTubeMusicManager {
     }
   }
 
-  async crossfade() {
+    async crossfade() {
     if (!this.current || !this.next) return;
+
+    const workVol = parseFloat(document.getElementById('workVolume').value) * 100;
+    const breakVol = parseFloat(document.getElementById('breakVolume').value) * 100;
+
+    const fromVol = this.current === this.player1 ? workVol : breakVol;
+    const toVol = this.next === this.player1 ? workVol : breakVol;
 
     this.next.setVolume(0);
     this.next.playVideo();
@@ -113,9 +119,10 @@ class YouTubeMusicManager {
     const delay = this.fadeDuration / steps;
 
     for (let i = 0; i <= steps; i++) {
-      const volume = Math.round((i / steps) * 100);
-      this.current.setVolume(100 - volume);
-      this.next.setVolume(volume);
+      const fadeOut = Math.round(fromVol * (1 - i / steps));
+      const fadeIn = Math.round(toVol * (i / steps));
+      this.current.setVolume(fadeOut);
+      this.next.setVolume(fadeIn);
       await this._sleep(delay);
     }
 
