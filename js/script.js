@@ -271,6 +271,7 @@ breakAudio.addEventListener('ended', () => {
         const modeText = state.mode === 'longBreak' ? 'Long Break' : state.mode.charAt(0).toUpperCase() + state.mode.slice(1);
         const roundDisplay = `Round ${state.roundCount + 1}`;
         statusDiv.textContent = `Status: ${modeText} session (${roundDisplay})`;
+        updateFavicon();
     }
 
     function startPomodoro() {
@@ -328,6 +329,34 @@ breakAudio.addEventListener('ended', () => {
         resetRoundsBtn.classList.remove('d-none');
     }
 
+    function updateFavicon(stop = false) {
+      const link = document.querySelector("link[rel~='icon']");
+      const favicon = document.createElement('link');
+      favicon.rel = 'icon';
+      favicon.type = 'image/png';
+
+      if (stop) {
+        favicon.href = 'assets/favicon.png';
+      } else{
+        if (state.mode === 'work') {
+          favicon.href = 'assets/favicon-work.png';
+        } else if (state.mode === 'break') {
+          favicon.href = 'assets/favicon-break.png';
+        } else if (state.mode === 'longBreak') {
+          favicon.href = 'assets/favicon-longbreak.png';
+        } else {
+          favicon.href = 'assets/favicon.png'; // fallback
+        }
+      }
+
+
+      if (link) {
+        document.head.removeChild(link);
+      }
+      document.head.appendChild(favicon);
+    }
+
+
     function resetRounds() {
         state = {
             mode: 'work',
@@ -349,6 +378,7 @@ breakAudio.addEventListener('ended', () => {
         }
         startBtn.classList.remove('d-none');
         resetRoundsBtn.classList.add('d-none');
+        updateFavicon(true);
     }
 
     startBtn.addEventListener('click', startPomodoro);
