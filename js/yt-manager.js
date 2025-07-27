@@ -17,7 +17,7 @@ class YouTubeMusicManager {
             width: '100%',
             height: '100%',
             playerVars: {
-                controls: 1,
+                controls: 0,
                 modestbranding: 1,
                 rel: 0
             },
@@ -30,7 +30,7 @@ class YouTubeMusicManager {
             width: '100%',
             height: '100%',
             playerVars: {
-                controls: 1,
+                controls: 0,
                 modestbranding: 1,
                 rel: 0
             },
