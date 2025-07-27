@@ -84,6 +84,7 @@
     const workVolSlider = document.getElementById('workVolume');
     const breakVolSlider = document.getElementById('breakVolume');
     const resetRoundsBtn = document.getElementById('resetRoundsBtn');
+    const skipSessionBtn = document.getElementById('skipSessionBtn');
 
     const startBtn = document.getElementById('startBtn');
     const statusDiv = document.getElementById('status');
@@ -315,6 +316,7 @@
             saveState();
             startBtn.classList.add('d-none');
             resetRoundsBtn.classList.remove('d-none');
+            skipSessionBtn.classList.remove('d-none');
             return;
         }
 
@@ -346,6 +348,7 @@
         saveState();
         startBtn.classList.add('d-none');
         resetRoundsBtn.classList.remove('d-none');
+        skipSessionBtn.classList.remove('d-none');
     }
 
     function updateFavicon(stop = false) {
@@ -396,11 +399,24 @@
         }
         startBtn.classList.remove('d-none');
         resetRoundsBtn.classList.add('d-none');
+        skipSessionBtn.classList.add('d-none');
         updateFavicon(true);
     }
 
     startBtn.addEventListener('click', startPomodoro);
     resetRoundsBtn.addEventListener('click', resetRounds);
+
+
+    function skipSession() {
+      if (crossfadeTimeout) {
+        clearTimeout(crossfadeTimeout);
+        crossfadeTimeout = null;
+      }
+      startCrossfade(); // reuse the same logic used in auto switch
+      updateTimerDisplay(); // immediately reflect the new session
+    }
+
+    skipSessionBtn.addEventListener('click', skipSession);
 
     window.addEventListener('load', () => {
         loadState();

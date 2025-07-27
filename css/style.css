@@ -329,3 +329,27 @@ body.dark-mode .volume-slider:hover {
 body.dark-mode .volume-slider:focus-visible {
   box-shadow: 0 0 5px 2px rgba(255, 100, 100, 0.6);
 }
+
+.btn-skip {
+  background-color: #ffc107; /* Bootstrap warning color */
+  border-color: #e0a800;
+  color: #000;
+}
+
+.btn-skip:hover {
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.5);
+  background-color: #ffca2c;
+  border-color: #d39e00;
+}
+
+body.dark-mode .btn-skip {
+  background-color: #e0a800;
+  border-color: #c69500;
+}
+
+body.dark-mode .btn-skip:hover {
+  background-color: #ffcd39;
+  border-color: #d39e00;
+  box-shadow: 0 1px 10px rgba(255, 200, 50, 0.5);
+}
+

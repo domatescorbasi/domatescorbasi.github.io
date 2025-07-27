@@ -194,7 +194,7 @@ playBreak(startTime = 0) {
     }
 }
 
-const ytManager = new YouTubeMusicManager(4000);
+const ytManager = new YouTubeMusicManager(5000);
 
 
 const _ytInput1 = document.getElementById('ytInput1');
