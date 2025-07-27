@@ -301,7 +301,7 @@
         if (isYouTubeTabActive()) {
             // YouTube mode
             if (!ytManager || !ytManager.current || !ytManager.next) {
-                alert('Please make sure both YouTube links are loaded.');
+                // alert('Please make sure both YouTube links are loaded.');
                 return;
             }
 
