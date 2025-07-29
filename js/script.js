@@ -85,6 +85,9 @@
     const breakVolSlider = document.getElementById('breakVolume');
     const resetRoundsBtn = document.getElementById('resetRoundsBtn');
     const skipSessionBtn = document.getElementById('skipSessionBtn');
+    const skipSpinner = skipSessionBtn.querySelector('.spinner-border');
+    const skipText = skipSessionBtn.querySelector('.btn-text');
+
 
     const startBtn = document.getElementById('startBtn');
     const statusDiv = document.getElementById('status');
@@ -408,13 +411,26 @@
 
 
     function skipSession() {
+      if (skipSessionBtn.disabled) return;
+
+      skipSessionBtn.disabled = true;
+      skipSpinner.classList.remove('d-none');
+      skipText.classList.add('d-none');
+
       if (crossfadeTimeout) {
         clearTimeout(crossfadeTimeout);
         crossfadeTimeout = null;
       }
-      startCrossfade(); // reuse the same logic used in auto switch
-      updateTimerDisplay(); // immediately reflect the new session
+      startCrossfade();
+      updateTimerDisplay();
+
+      setTimeout(() => {
+        skipSessionBtn.disabled = false;
+        skipSpinner.classList.add('d-none');
+        skipText.classList.remove('d-none');
+      }, 10000);
     }
+
 
     skipSessionBtn.addEventListener('click', skipSession);
 
