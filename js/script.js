@@ -180,8 +180,18 @@
         }
     });
 
+    // Restore volume from localStorage or default to 1.0
+    const savedWorkVol = parseFloat(localStorage.getItem('workVolume')) || 1.0;
+    const savedBreakVol = parseFloat(localStorage.getItem('breakVolume')) || 1.0;
+    workVolSlider.value = savedWorkVol;
+    breakVolSlider.value = savedBreakVol;
+    workGain.gain.value = savedWorkVol;
+    breakGain.gain.value = savedBreakVol;
+
+
     workVolSlider.addEventListener('input', () => {
         const volume = parseFloat(workVolSlider.value);
+        localStorage.setItem('workVolume', volume);
         if (state.mode === 'work') {
             if (isYouTubeTabActive()) {
                 ytManager.setVolumeForCurrent(volume);
@@ -193,6 +203,7 @@
 
     breakVolSlider.addEventListener('input', () => {
         const volume = parseFloat(breakVolSlider.value);
+        localStorage.setItem('breakVolume', volume);
         if (state.mode === 'break' || state.mode === 'longBreak') {
             if (isYouTubeTabActive()) {
                 ytManager.setVolumeForCurrent(volume);
