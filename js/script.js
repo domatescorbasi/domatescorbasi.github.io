@@ -6,6 +6,10 @@
         return ytTab && ytTab.classList.contains('active');
     }
 
+    function isSpotifyTabActive() {
+        const spotifyTab = document.querySelector('#spotify');
+        return spotifyTab && spotifyTab.classList.contains('active');
+    }
 
     document.addEventListener('DOMContentLoaded', function () {
         const themeToggleWrapper = document.getElementById('themeToggleWrapper');
@@ -267,6 +271,24 @@
                 return;
             }
 
+            if (isSpotifyTabActive()) {
+                spotifyManager.crossfade().then(() => {
+                    state.mode = state.mode === 'work' ? (
+                        (state.roundCount + 1) % parseInt(roundsUntilLongBreakInput.value) === 0 ? 'longBreak' : 'break'
+                    ) : 'work';
+
+                    if (state.mode === 'work') {
+                        state.roundCount++;
+                    }
+
+                    state.startTime = Date.now();
+                    updateStatus();
+                    saveState();
+                    crossfadeTimeout = null;
+                });
+                return;
+            }
+
             // Local audio crossfade
             if (state.mode === 'work') {
                 state.workAudioPos = workAudio.currentTime;
@@ -333,6 +355,20 @@
             skipSessionBtn.classList.remove('d-none');
             return;
         }
+
+        if (isSpotifyTabActive()) {
+            spotifyManager.playWork();
+            state.paused = false;
+            state.startTime = Date.now();
+            startTimer();
+            updateStatus();
+            saveState();
+            startBtn.classList.add('d-none');
+            resetRoundsBtn.classList.remove('d-none');
+            skipSessionBtn.classList.remove('d-none');
+            return;
+        }
+
 
         // Local file mode
         if (!workTrackInput.files[0] || !breakTrackInput.files[0]) {
@@ -410,6 +446,9 @@
         document.title = "Pomodoro 🎵⏱️";
         if (isYouTubeTabActive()) {
             ytManager.stopAll();
+        }
+        if (isSpotifyTabActive()) {
+            spotifyManager.stopAll();
         }
         startBtn.classList.remove('d-none');
         resetRoundsBtn.classList.add('d-none');

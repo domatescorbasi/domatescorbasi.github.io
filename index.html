@@ -74,11 +74,14 @@
 				<div id="musicTracksCollapse" class="collapse show">
 					<div class="card-body">
 						<ul class="nav nav-tabs mb-3 d-flex w-100" id="musicTab" role="tablist" style="display: flex;">
-							<li class="nav-item w-50" role="presentation">
+							<li class="nav-item w-33" role="presentation">
 								<button class="nav-link active" id="local-tab" data-bs-toggle="tab" data-bs-target="#local" type="button" role="tab" aria-controls="local" aria-selected="true">🎵 Local Tracks</button>
 							</li>
-							<li class="nav-item w-50" role="presentation">
+							<li class="nav-item w-33" role="presentation">
 								<button class="nav-link" id="youtube-tab" data-bs-toggle="tab" data-bs-target="#youtube" type="button" role="tab" aria-controls="youtube" aria-selected="false">📺 YouTube Video</button>
+							</li>
+							<li class="nav-item w-33" role="presentation">
+								<button class="nav-link" id="spotify-tab" data-bs-toggle="tab" data-bs-target="#spotify" type="button" role="tab" aria-controls="spotify" aria-selected="false">🎧 Spotify</button>
 							</li>
 						</ul>
 						<div class="tab-content" id="musicTabContent">
@@ -120,6 +123,35 @@
 								<div class="row g-4 mb-3">
 									<div class="col-md-6" style="aspect-ratio: 16 / 9;"><div id="yt-player-1"></div></div>
 									<div class="col-md-6" style="aspect-ratio: 16 / 9;"><div id="yt-player-2"></div></div>
+								</div>
+							</div>
+							<!-- Spotify Music Tab -->
+							<div class="tab-pane fade" id="spotify" role="tabpanel" aria-labelledby="spotify-tab">
+								<div class="row mb-3">
+									<div class="col-md-6">
+										<label for="spotifyInput1" class="form-label small">Work Spotify Link</label>
+										<input
+										type="text"
+										id="spotifyInput1"
+										class="form-control form-control-sm"
+										value="https://open.spotify.com/playlist/6zCID88oNjNv9zx6puDHKj"
+										placeholder="https://open.spotify.com/track/..."
+										/>
+									</div>
+									<div class="col-md-6">
+										<label for="spotifyInput2" class="form-label small">Break Spotify Link</label>
+										<input
+										type="text"
+										id="spotifyInput2"
+										class="form-control form-control-sm"
+										value="https://open.spotify.com/playlist/32CIUvdPXaAc4dZnYU0cz4"
+										placeholder="https://open.spotify.com/track/..."
+										/>
+									</div>
+								</div>
+								<div class="row g-4 mb-3">
+									<div class="col-md-6" style="aspect-ratio: 16 / 9;"><iframe id="spotify-player-1" width="227" height="147" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe></div>
+									<div class="col-md-6" style="aspect-ratio: 16 / 9;"><iframe id="spotify-player-2" width="227" height="147" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe></div>
 								</div>
 							</div>
 						</div>
@@ -171,10 +203,13 @@
 				</div>
 			</div>
 		</div>
+		<!-- Spotify IFrame API -->
+		<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 		<!-- YouTube IFrame API -->
 		<script src="https://www.youtube.com/iframe_api"></script>
+		<script src="js/spotify-manager.js"></script>
 		<script src="js/yt-manager.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="js/script.js"></script>
 	</body>
 </html>
